@@ -1,0 +1,60 @@
+mixin svgMono(name, modClass)
+  if modClass == undefined
+    - var modClass = ''
+  else
+    - var modClass = ' ' + modClass
+  svg(class="ico ico-mono-" + name + modClass)
+    use(xlink:href= 'img/sprite-mono.svg#ico-mono-' + name)
+
+mixin svgColor(name, modClass)
+  if modClass == undefined
+    - var modClass = ''
+  else
+    - var modClass = ' ' + modClass
+  svg(class="ico ico-color-" + name + modClass)
+    use(xlink:href= 'img/sprite-color.svg#ico-color-' + name)
+
+mixin webp(names, typeImg, lazy, alt, sizes)
+  - let altValue
+  if alt == undefined 
+    - altValue = ''
+  else 
+    - altValue = alt 
+  if lazy == undefined || lazy == ''
+    - let i = 0
+    picture
+      if sizes
+        each size in sizes 
+          each sizeValue, key in size
+            each value in sizeValue
+              if key == 'min'
+                source(srcset="/img/"+names[i]+".webp" type="image/webp" media="(min-width: " + value + "px)")
+                source(srcset="/img/"+names[i]+"."+typeImg+"" type="image/"+typeImg+"" media="(min-width: " + value + "px)")
+              if key == 'max'
+                source(srcset="/img/"+names[i]+".webp" type="image/webp" media="(max-width: " + value + "px)")
+                source(srcset="/img/"+names[i]+"."+typeImg+"" type="image/"+typeImg+"" media="(max-width: " + value + "px)")
+              - i++
+        img(src="/img/"+names[0]+"."+typeImg+"" alt=""+altValue+"")
+      else 
+        source(srcset="/img/"+names[i]+".webp" type="image/webp")
+        source(srcset="/img/"+names[i]+"."+typeImg+"" type="image/"+typeImg+"")
+        img(src="/img/"+names[i]+"."+typeImg+"" alt=""+altValue+"")
+  else 
+    - let i = 0
+    picture
+      if sizes
+        each size in sizes 
+          each sizeValue, key in size
+            each value in sizeValue
+              if key == 'min'
+                source(data-srcset="/img/"+names[i]+".webp" type="image/webp" media="(min-width: " + value + "px)")
+                source(data-srcset="/img/"+names[i]+"."+typeImg+"" type="image/"+typeImg+"" media="(min-width: " + value + "px)")
+              if key == 'max'
+                source(data-srcset="/img/"+names[i]+".webp" type="image/webp" media="(max-width: " + value + "px)")
+                source(data-srcset="/img/"+names[i]+"."+typeImg+"" type="image/"+typeImg+"" media="(max-width: " + value + "px)")
+              - i++
+        img(data-src="/img/"+names[0]+"."+typeImg+"" alt=""+altValue+"" class=lazy)
+      else 
+        source(data-srcset="/img/"+names[i]+".webp" type="image/webp")
+        source(data-srcset="/img/"+names[i]+"."+typeImg+"" type="image/"+typeImg+"")
+        img(data-src="/img/"+names[i]+"."+typeImg+"" alt=""+altValue+"" class=lazy)

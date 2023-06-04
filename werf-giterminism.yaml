@@ -1,0 +1,6 @@
+giterminismConfigVersion: 1
+config:
+  goTemplateRendering:
+    allowEnvVariables:
+      - CI_PROJECT_PATH_SLUG
+      - ENV_NAME_FULL

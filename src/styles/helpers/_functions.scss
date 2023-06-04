@@ -1,0 +1,23 @@
+@function rem($px) {
+  @return ($px / 16) + rem;
+}
+
+// z-index: z('site-header'); Используется для адекватного определения z-index'a. Выставляем последовательность элементов тут.
+@function z($name) {
+  @if index($z-indexes, $name) {
+    @return (length($z-indexes) - index($z-indexes, $name)) + 1;
+  } @else {
+    @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+    @return null;
+  }
+}
+
+$z-indexes: ();
+
+@function max($numbers...) {
+  @return m#{a}x(#{$numbers});
+}
+
+@function min($numbers...) {
+  @return m#{i}n(#{$numbers});
+}

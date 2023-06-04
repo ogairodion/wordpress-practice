@@ -1,0 +1,7 @@
+ProjectTitle: ProjectName
+
+PageList:
+  - file: homepage.html
+    ready: 1
+  - file: 404.html
+    ready: 1
