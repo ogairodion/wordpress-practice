@@ -1,0 +1,11 @@
+.header {
+    background: rgba(#000, .6);
+    padding: 16px 0;
+
+    &__logo {
+        font-size: 20px;
+        line-height: 120%;
+        font-weight: 600;
+        color: #fff;
+    }
+}
